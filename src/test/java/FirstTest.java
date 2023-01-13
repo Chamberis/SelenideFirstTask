@@ -35,10 +35,10 @@ public class FirstTest {
         // toggle b
         $("#todo-list li:nth-child(2) .toggle").click();
         // completed todos should be b
-        $("#todo-list li:nth-child(3) a").click();
+        $("#footer li:nth-child(3) a").click();
         $(".view").shouldHave(exactText("b"));
         // active todos should be a, c
-        $("#todo-list li:nth-child(2) a").click();
+        $("#footer li:nth-child(2) a").click();
         $("#todo-list li:nth-child(1)").shouldHave(exactText("a"));
         $("#todo-list li:nth-child(2)").shouldHave(exactText("c"));
     }
