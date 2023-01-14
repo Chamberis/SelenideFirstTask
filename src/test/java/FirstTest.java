@@ -1,6 +1,7 @@
 import com.codeborne.selenide.CollectionCondition;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -29,16 +30,12 @@ public class FirstTest {
         $("#new-todo").setValue("b").pressEnter();
         $("#new-todo").setValue("c").pressEnter();
         // todos should be "a", "b", "c"
-        $$("#todo-list li").shouldHave(texts("a","b","c"));
+        $$("#todo-list li").shouldHave(exactTexts("a", "b", "c"));
         // toggle b
         $("#todo-list li:nth-of-type(2) .toggle").click();
         // completed todos should be b
-        $("#footer li:nth-of-type(3) a").click();
-        $(".view").shouldHave(exactText("b"));
+        $$("#todo-list li.completed").shouldHave(exactTexts("b"));
         // active todos should be a, c
-        $("#footer li:nth-of-type(2) a").click();
-        $("#todo-list li:nth-of-type(1)").shouldHave(exactText("a"));
-        $("#todo-list li:nth-of-type(2)").shouldHave(exactText("c"));
+        $$("#todo-list li:not(.completed)").shouldHave(exactTexts("a", "c"));
     }
-
 }
