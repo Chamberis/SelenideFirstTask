@@ -1,12 +1,11 @@
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
-import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Selenide.*;
 
-public class todoMvcTest {
+public class TodoMvcTest {
     @Test
-    public void crudTodo() {
+    public void checkingIfAddingAndTogglingWorks() {
         open("https://todomvc.com/examples/emberjs/");
 
         $("#new-todo").setValue("a").pressEnter();
