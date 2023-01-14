@@ -5,16 +5,16 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TodoMvcTest {
     @Test
-    public void checkingIfAddingAndTogglingWorks() {
+    public void completesTask() {
         open("https://todomvc.com/examples/emberjs/");
 
-        $("#new-todo").setValue("a").pressEnter();
-        $("#new-todo").setValue("b").pressEnter();
-        $("#new-todo").setValue("c").pressEnter();
-        $$("#todo-list li").shouldHave(exactTexts("a", "b", "c"));
+        $x("//div/section/header/input").setValue("a").pressEnter();
+        $x("//div/section/header/input").setValue("b").pressEnter();
+        $x("//div/section/header/input").setValue("c").pressEnter();
+        $$x("//*[@id=\"todo-list\"]/li").shouldHave(exactTexts("a", "b", "c"));
 
-        $("#todo-list li:nth-of-type(2) .toggle").click();
-        $$("#todo-list li.completed").shouldHave(exactTexts("b"));
-        $$("#todo-list li:not(.completed)").shouldHave(exactTexts("a", "c"));
+        $x("//div/section/section/ul/li[2]/div/input").click();
+        $$x("//li[contains(@class, \"completed\")]").shouldHave(exactTexts("b"));
+        $$x("//section/section/ul/li[not(contains(@class, \"completed\"))]").shouldHave(exactTexts("a", "c"));
     }
 }
