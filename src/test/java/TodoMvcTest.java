@@ -15,6 +15,6 @@ public class TodoMvcTest {
 
         $x("(//input[@class='toggle'])[2]").click();
         $$x("//*[contains(concat(\" \", normalize-space(@class), \" \"), \" completed \")]").shouldHave(exactTexts("b"));
-        $$x("//section/section/ul/li[not(contains(concat(\" \", normalize-space(@class), \" \"), \" completed \"))]").shouldHave(exactTexts("a", "c"));
+        $$x("//ul/li[not(contains(concat(\" \", normalize-space(@class), \" \"), \" completed \"))]").shouldHave(exactTexts("a", "c"));
     }
 }
