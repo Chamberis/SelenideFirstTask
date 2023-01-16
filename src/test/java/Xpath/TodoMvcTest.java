@@ -1,3 +1,5 @@
+package Xpath;
+
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
