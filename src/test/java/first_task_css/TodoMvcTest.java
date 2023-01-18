@@ -1,4 +1,4 @@
-package CssSelectors;
+package first_task_css;
 
 import org.junit.jupiter.api.Test;
 
