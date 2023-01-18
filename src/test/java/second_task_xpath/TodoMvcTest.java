@@ -1,4 +1,4 @@
-package Xpath;
+package second_task_xpath;
 
 import org.junit.jupiter.api.Test;
 
