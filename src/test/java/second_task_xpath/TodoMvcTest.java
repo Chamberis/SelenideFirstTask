@@ -6,18 +6,6 @@ import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TodoMvcTest {
-    public void toggleTodo(String name){
-        $x("//*[@id='todo-list']//li[.//text()='" + name + "']//*[contains(concat(' ',normalize-space(@class),' '),' toggle ')]")
-                .click();
-    }
-    public void checkCompleted(String todoVal){
-        $$x("//*[@id='todo-list']//li[contains(concat(' ', normalize-space(@class), ' '), ' completed ')]")
-                .shouldHave(exactTexts(todoVal));
-    }
-    public void checkActive(String todoVal1, String todoVal2){
-        $$x("//*[@id='todo-list']//li[not(contains(concat(' ', normalize-space(@class), ' '), ' completed '))]")
-                .shouldHave(exactTexts(todoVal1, todoVal2));
-    }
     @Test
     public void completesTask() {
         open("https://todomvc.com/examples/emberjs/");
@@ -28,8 +16,18 @@ public class TodoMvcTest {
         $$x("//*[@id='todo-list']//li")
                 .shouldHave(exactTexts("a", "b", "c"));
 
-        toggleTodo("b");
-        checkCompleted("b");
-        checkActive("a", "c");
+        $x("//*[@id='todo-list']//li[.//text()='b']//*" + withClass("toggle"))
+                .click();
+        $$x("//*[@id='todo-list']//li" + withClass("completed"))
+                .shouldHave(exactTexts("b"));
+        $$x("//*[@id='todo-list']//li" + withoutClass("completed"))
+                .shouldHave(exactTexts("a", "c"));
+    }
+    public String withClass(String className){
+       return  "[contains(concat(' ',normalize-space(@class),' '),' " + className + " ')]";
+    }
+
+    public String withoutClass(String className){
+        return "[not(contains(concat(' ',normalize-space(@class),' '),' " + className + " '))]";
     }
 }
