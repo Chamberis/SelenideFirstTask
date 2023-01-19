@@ -19,5 +19,4 @@ public class TodoMvcTest {
         $$("#todo-list li.completed").shouldHave(exactTexts("b"));
         $$("#todo-list li:not(.completed)").shouldHave(exactTexts("a", "c"));
     }
-
 }
