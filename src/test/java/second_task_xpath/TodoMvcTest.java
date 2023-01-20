@@ -16,7 +16,7 @@ public class TodoMvcTest {
         $$x("//*[@id='todo-list']//li")
                 .shouldHave(exactTexts("a", "b", "c"));
 
-        $x("//*[@id='todo-list']//li[.//text()='b']//*" + withClass("toggle"))
+        $x("//*[@id='todo-list']//li" + withText("b") + "//*" + withClass("toggle"))
                 .click();
         $$x("//*[@id='todo-list']//li" + withClass("completed"))
                 .shouldHave(exactTexts("b"));
@@ -29,5 +29,9 @@ public class TodoMvcTest {
 
     public String withoutClass(String className){
         return "[not(contains(concat(' ',normalize-space(@class),' '),' " + className + " '))]";
+    }
+
+    public String withText(String text){
+        return "[.//text()='" + text + "']";
     }
 }
