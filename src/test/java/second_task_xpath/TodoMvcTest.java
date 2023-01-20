@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TodoMvcTest {
+import base.TestBase;
+
+public class TodoMvcTest extends TestBase{
     @Test
     public void completesTask() {
         open("https://todomvc.com/examples/emberjs/");
@@ -22,16 +24,5 @@ public class TodoMvcTest {
                 .shouldHave(exactTexts("b"));
         $$x("//*[@id='todo-list']//li" + withoutClass("completed"))
                 .shouldHave(exactTexts("a", "c"));
-    }
-    public String withClass(String className){
-       return  "[contains(concat(' ',normalize-space(@class),' '),' " + className + " ')]";
-    }
-
-    public String withoutClass(String className){
-        return "[not(contains(concat(' ',normalize-space(@class),' '),' " + className + " '))]";
-    }
-
-    public String withText(String text){
-        return "[.//text()='" + text + "']";
     }
 }
