@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.*;
 
-import base.TestBase;
+import common.xpathselectors.X;
 
-public class TodoMvcTest extends TestBase{
+public class TodoMvcTest extends X {
     @Test
     public void completesTask() {
         open("https://todomvc.com/examples/emberjs/");
@@ -18,11 +18,11 @@ public class TodoMvcTest extends TestBase{
         $$x("//*[@id='todo-list']//li")
                 .shouldHave(exactTexts("a", "b", "c"));
 
-        $x("//*[@id='todo-list']//li" + withText("b") + "//*" + withClass("toggle"))
+        $x("//*[@id='todo-list']//li" + X.filterByText("b") + "//*" + filterByClass("toggle"))
                 .click();
-        $$x("//*[@id='todo-list']//li" + withClass("completed"))
+        $$x("//*[@id='todo-list']//li" + X.filterByClass("completed"))
                 .shouldHave(exactTexts("b"));
-        $$x("//*[@id='todo-list']//li" + withoutClass("completed"))
+        $$x("//*[@id='todo-list']//li" + X.filterByNoClass("completed"))
                 .shouldHave(exactTexts("a", "c"));
     }
 }
