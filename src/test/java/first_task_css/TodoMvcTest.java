@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class TodoMvcTest {
 
     @Test
-    public void crudTodo() {
+    public void completesTask() {
         open("https://todomvc.com/examples/emberjs/");
 
         $("#new-todo").setValue("a").pressEnter();
